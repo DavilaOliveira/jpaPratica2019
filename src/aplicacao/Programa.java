@@ -74,17 +74,22 @@ public class Programa {
 
 			case 4:
 				int id1 = pedirInteiro(acesso, "Digite o ID: ");
-
 				Pessoa pessoaFound1 = entityManager.find(Pessoa.class, id1);
-				System.out.println("Digite o nome atual: ");
-				String nome1 = acesso.nextLine();
-				System.out.println("Digite o email atual: ");
-				String email1 = acesso.nextLine();
-				pessoaFound1.setEmail(email1);
-				pessoaFound1.setNome(nome1);
-				entityManager.getTransaction().begin();
-				entityManager.persist(pessoaFound1);
-				entityManager.getTransaction().commit();
+
+				if (pessoaFound1 != null) {
+					System.out.println("Digite o nome atual: ");
+					String nome1 = acesso.nextLine();
+					System.out.println("Digite o email atual: ");
+					String email1 = acesso.nextLine();
+					pessoaFound1.setEmail(email1);
+					pessoaFound1.setNome(nome1);
+					entityManager.getTransaction().begin();
+					entityManager.persist(pessoaFound1);
+					entityManager.getTransaction().commit();
+
+				} else {
+					System.out.println("Não é possível a atualização pois o id digitado não existe no Banco de Dados.");
+				}
 				break;
 
 //--------------------------------------------------------------------------------------------------------------------------
